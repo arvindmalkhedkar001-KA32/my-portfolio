@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +10,15 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
       --paper: #f4f0e7;
-      --ink: #171713;
-      --red: #ef422e;
+      --ink: #3c2b4d;
+      --red: #863acc;
       --muted: #77766d;
       --line: rgba(23, 23, 19, 0.25);
       --mono: "DM Mono", monospace;
@@ -31,7 +33,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+      scroll-padding-top: 100px;
     }
 
     body {
@@ -42,6 +44,7 @@
     }
 
     @media (hover: hover) and (pointer: fine) {
+
       body,
       a,
       button,
@@ -149,9 +152,12 @@
     }
 
     @keyframes mascot-bob {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translateY(0) rotate(-4deg);
       }
+
       50% {
         transform: translateY(-3px) rotate(4deg);
       }
@@ -205,50 +211,87 @@
 
     .nav-inner {
       width: min(1280px, 90%);
-      min-height: 67px;
+      min-height: 72px;
       margin: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 24px;
     }
 
     .brand {
-      font-size: 19px;
+      font-size: 24px;
       font-weight: 700;
-      letter-spacing: -1.5px;
+      letter-spacing: -1px;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: baseline;
+      transition: color 0.2s ease;
     }
 
     .brand span {
       color: var(--red);
     }
 
+    .brand:hover {
+      color: var(--red);
+    }
+
+    .brand:focus-visible,
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
-      gap: clamp(15px, 3vw, 38px);
+      gap: clamp(22px, 3.5vw, 42px);
     }
 
     .nav-links a {
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
       position: relative;
+      padding: 8px 0;
+      display: inline-block;
+      transition: color 0.2s ease;
     }
 
     .nav-links a::after {
       content: "";
       position: absolute;
-      bottom: -5px;
+      bottom: 0;
       left: 0;
-      width: 0;
+      width: 100%;
       height: 2px;
       background: var(--red);
-      transition: width 0.25s;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .nav-links a:hover {
+      color: var(--red);
     }
 
     .nav-links a:hover::after {
-      width: 100%;
+      transform: scaleX(1);
+    }
+
+    .nav-links a.active {
+      color: var(--red);
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
     }
 
     .availability {
@@ -266,7 +309,9 @@
     }
 
     @keyframes blink {
-      50% { opacity: 0.35; }
+      50% {
+        opacity: 0.35;
+      }
     }
 
     /* HERO */
@@ -385,31 +430,57 @@
 
     .ticker {
       background: var(--red);
-      color: white;
+      color: #ffffff;
       border-bottom: 1px solid var(--ink);
       overflow: hidden;
-      padding: 13px 0;
+      padding: 14px 0;
+      position: relative;
+      user-select: none;
     }
 
     .ticker-track {
       display: flex;
       width: max-content;
-      animation: ticker 28s linear infinite;
+      animation: ticker 32s linear infinite;
+      will-change: transform;
     }
 
-    .ticker-track span {
+    .ticker-track span,
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding-right: 32px;
+      color: #ffffff;
+      padding-right: 56px;
+      white-space: nowrap;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .ticker:hover .ticker-track {
+    .ticker-symbol {
+      display: inline-block;
+      margin-left: 20px;
+      color: #ffffff;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .ticker:hover .ticker-track,
+    .ticker:focus-within .ticker-track {
       animation-play-state: paused;
     }
 
     @keyframes ticker {
-      to { transform: translateX(-50%); }
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+      to {
+        transform: translate3d(-50%, 0, 0);
+      }
     }
 
     /* SECTION HEADINGS */
@@ -484,7 +555,7 @@
       border: 1px solid var(--ink);
       width: 78%;
       box-shadow: 9px 9px 0 var(--ink);
-      transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
+      transition: transform 0.4s cubic-bezier(.2, .8, .2, 1);
     }
 
     .project:hover .browser {
@@ -896,7 +967,7 @@
     }
 
     .contact .section-top {
-      border-color: rgba(255,255,255,0.5);
+      border-color: rgba(255, 255, 255, 0.5);
     }
 
     .contact .section-title {
@@ -965,7 +1036,7 @@
     .reveal {
       opacity: 0;
       transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.2,.7,.2,1);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.2, .7, .2, 1);
     }
 
     .reveal.visible {
@@ -974,7 +1045,7 @@
     }
 
     .hero .line {
-      animation: enter 0.8s cubic-bezier(.2,.8,.2,1) both;
+      animation: enter 0.8s cubic-bezier(.2, .8, .2, 1) both;
     }
 
     .hero .line:nth-child(2) {
@@ -990,6 +1061,7 @@
         transform: translateY(110%);
         opacity: 0;
       }
+
       to {
         transform: translateY(0);
         opacity: 1;
@@ -1007,6 +1079,19 @@
     @media (max-width: 800px) {
       .availability {
         display: none;
+      }
+
+      .nav-inner {
+        min-height: 64px;
+      }
+
+      .nav-links {
+        gap: clamp(16px, 3vw, 30px);
+      }
+
+      .nav-links a {
+        font-size: 13.5px;
+        padding: 6px 0;
       }
 
       .hero {
@@ -1054,25 +1139,53 @@
     }
 
     @media (max-width: 520px) {
+
+      html {
+        scroll-padding-top: 72px;
+      }
+
       .container,
       .nav-inner {
-        width: 90%;
+        width: 92%;
       }
 
       .nav-inner {
         min-height: 58px;
-      }
-
-      .nav-links {
         gap: 12px;
       }
 
-      .nav-links a {
-        font-size: 9px;
+      .brand {
+        font-size: 20px;
+        letter-spacing: -0.8px;
+        flex-shrink: 0;
       }
 
-      .brand {
-        font-size: 17px;
+      .nav-links {
+        gap: clamp(10px, 2.5vw, 16px);
+        flex-wrap: nowrap;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 4px 2px;
+        white-space: nowrap;
+      }
+
+      .ticker {
+        padding: 11px 0;
+      }
+
+      .ticker-track span,
+      .ticker-item {
+        font-size: 12px;
+        padding-right: 36px;
+      }
+
+      .ticker-symbol {
+        margin-left: 14px;
+        font-size: 11px;
       }
 
       .hero-meta {
@@ -1190,7 +1303,10 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
@@ -1200,6 +1316,19 @@
       .reveal {
         opacity: 1;
         transform: none;
+      }
+
+      .ticker-track {
+        animation: none !important;
+        transform: none !important;
+      }
+
+      .ticker {
+        overflow-x: auto;
+      }
+
+      .nav-links a::after {
+        transition: none !important;
       }
     }
   </style>
@@ -1220,9 +1349,9 @@
   </div>
 
   <!-- NAVIGATION -->
-  <nav class="nav">
+  <nav class="nav" aria-label="Main Navigation">
     <div class="nav-inner">
-      <a href="#home" class="brand">ARVIND<span>.</span></a>
+      <a href="#home" class="brand" aria-label="Arvind - Home">ARVIND<span>.</span></a>
 
       <div class="nav-links">
         <a href="#work">Work</a>
@@ -1272,16 +1401,20 @@
     </section>
 
     <!-- TICKER -->
-    <div class="ticker" aria-label="Design, build, learn, repeat">
+    <div class="ticker" aria-label="Core principles: Design with intent, Build with purpose, Learn by doing, Break things and fix things, Code as craft, Experiment constantly">
       <div class="ticker-track">
-        <span>DESIGN WITH INTENT ✳</span>
-        <span>BUILD WITH PURPOSE ↗</span>
-        <span>LEARN BY DOING ✳</span>
-        <span>BREAK THINGS / FIX THINGS ↗</span>
-        <span>DESIGN WITH INTENT ✳</span>
-        <span>BUILD WITH PURPOSE ↗</span>
-        <span>LEARN BY DOING ✳</span>
-        <span>BREAK THINGS / FIX THINGS ↗</span>
+        <span class="ticker-item">DESIGN WITH INTENT <span class="ticker-symbol" aria-hidden="true">✳</span></span>
+        <span class="ticker-item">BUILD WITH PURPOSE <span class="ticker-symbol" aria-hidden="true">✦</span></span>
+        <span class="ticker-item">LEARN BY DOING <span class="ticker-symbol" aria-hidden="true">↗</span></span>
+        <span class="ticker-item">BREAK THINGS / FIX THINGS <span class="ticker-symbol" aria-hidden="true">✳</span></span>
+        <span class="ticker-item">CODE AS CRAFT <span class="ticker-symbol" aria-hidden="true">✦</span></span>
+        <span class="ticker-item">EXPERIMENT CONSTANTLY <span class="ticker-symbol" aria-hidden="true">↗</span></span>
+        <span class="ticker-item" aria-hidden="true">DESIGN WITH INTENT <span class="ticker-symbol" aria-hidden="true">✳</span></span>
+        <span class="ticker-item" aria-hidden="true">BUILD WITH PURPOSE <span class="ticker-symbol" aria-hidden="true">✦</span></span>
+        <span class="ticker-item" aria-hidden="true">LEARN BY DOING <span class="ticker-symbol" aria-hidden="true">↗</span></span>
+        <span class="ticker-item" aria-hidden="true">BREAK THINGS / FIX THINGS <span class="ticker-symbol" aria-hidden="true">✳</span></span>
+        <span class="ticker-item" aria-hidden="true">CODE AS CRAFT <span class="ticker-symbol" aria-hidden="true">✦</span></span>
+        <span class="ticker-item" aria-hidden="true">EXPERIMENT CONSTANTLY <span class="ticker-symbol" aria-hidden="true">↗</span></span>
       </div>
     </div>
 
@@ -1320,7 +1453,8 @@
               <h3>Project One</h3>
               <span class="number">[ 01 ]</span>
             </div>
-            <p>A website concept focused on clear communication, strong visual hierarchy, and a thoughtful user experience.</p>
+            <p>A website concept focused on clear communication, strong visual hierarchy, and a thoughtful user
+              experience.</p>
             <div class="tags">
               <span>HTML</span><span>CSS</span><span>JavaScript</span>
             </div>
@@ -1392,7 +1526,8 @@
               <h3>Project Three</h3>
               <span class="number">[ 03 ]</span>
             </div>
-            <p>A creative experiment in typography, visual storytelling, and making ordinary web layouts feel different.</p>
+            <p>A creative experiment in typography, visual storytelling, and making ordinary web layouts feel different.
+            </p>
             <div class="tags">
               <span>Creative coding</span><span>CSS</span><span>Design</span>
             </div>
@@ -1424,7 +1559,8 @@
               <h3>Project Four</h3>
               <span class="number">[ 04 ]</span>
             </div>
-            <p>A small development experiment built to learn by doing, solve a problem, and understand the process behind the code.</p>
+            <p>A small development experiment built to learn by doing, solve a problem, and understand the process
+              behind the code.</p>
             <div class="tags">
               <span>JavaScript</span><span>Problem solving</span>
             </div>
@@ -1652,7 +1788,7 @@
         mascotCursor.classList.toggle(
           "is-hovering",
           event.target instanceof Element &&
-            Boolean(event.target.closest("a, button, [role='button']"))
+          Boolean(event.target.closest("a, button, [role='button']"))
         );
       });
 
@@ -1662,8 +1798,84 @@
         }
       });
     }
+
+    // Active navigation link tracking (scroll spy) & smooth interaction
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const brandLink = document.querySelector(".brand");
+    const trackedSections = document.querySelectorAll("section[id]");
+
+    function setActiveLink(id) {
+      navLinks.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href === `#${id}`) {
+          link.classList.add("active");
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.classList.remove("active");
+          link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    if ("IntersectionObserver" in window) {
+      const navObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const currentId = entry.target.getAttribute("id");
+              if (currentId === "home") {
+                // When in hero section, clear active indicator on nav links
+                navLinks.forEach((link) => {
+                  link.classList.remove("active");
+                  link.removeAttribute("aria-current");
+                });
+              } else {
+                setActiveLink(currentId);
+              }
+            }
+          });
+        },
+        {
+          rootMargin: "-20% 0px -60% 0px",
+          threshold: 0
+        }
+      );
+
+      trackedSections.forEach((section) => navObserver.observe(section));
+    }
+
+    // Bottom of page detection to ensure Contact is active when scrolled to bottom
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (
+          window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight - 50
+        ) {
+          setActiveLink("contact");
+        }
+      },
+      { passive: true }
+    );
+
+    // Immediate active indicator update on click
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const targetId = link.getAttribute("href")?.replace("#", "");
+        if (targetId) setActiveLink(targetId);
+      });
+    });
+
+    if (brandLink) {
+      brandLink.addEventListener("click", () => {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          link.removeAttribute("aria-current");
+        });
+      });
+    }
   </script>
 
 </body>
-</html>
 
+</html>
